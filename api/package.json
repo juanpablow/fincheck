@@ -8,7 +8,10 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
+    "start": "nest start && services:up",
+    "services:up": "docker compose -f infra/compose.yaml up -d",
+    "services:stop": "docker compose -f infra/compose.yaml stop",
+    "services:down": "docker compose -f infra/compose.yaml down",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
@@ -17,12 +20,17 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "prisma:generate": "dotenv -e .env.development -- pnpm prisma generate",
+    "prisma:migrate": "dotenv -e .env.development -- pnpm prisma migrate dev",
+    "prisma:studio": "dotenv -e .env.development -- pnpm prisma studio",
+    "prisma:deploy": "dotenv -e .env.development -- pnpm prisma deploy"
   },
   "dependencies": {
-    "@nestjs/common": "^10.0.0",
+    "@nestjs/common": "^10.3.10",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
+    "prisma": "^5.16.1",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"
   },
