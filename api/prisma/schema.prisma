@@ -19,6 +19,8 @@ model User {
   email    String @unique
   password String
 
+  bankAccounts BankAccount[]
+
   @@map("users")
 }
 
@@ -37,6 +39,8 @@ model BankAccount {
   initialBalance Float           @map("initial_balance")
   type           BankAccountType
   color          String
+
+  user User @relation(fields: [userId], references: [id])
 
   @@map("bank_accounts")
 }
