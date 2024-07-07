@@ -21,3 +21,22 @@ model User {
 
   @@map("users")
 }
+
+enum BankAccountType {
+  checking
+  investment
+  cash
+
+  @@map("bank_account_type")
+}
+
+model BankAccount {
+  id             String          @id @default(uuid()) @db.Uuid
+  userId         String          @map("user_id") @db.Uuid
+  name           String
+  initialBalance Float           @map("initial_balance")
+  type           BankAccountType
+  color          String
+
+  @@map("bank_accounts")
+}
