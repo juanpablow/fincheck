@@ -7,13 +7,10 @@ import { hash } from 'bcrypt';
 export class UsersService {
   constructor(private readonly usersRepo: UsersRepository) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async createUser(createUserDto: CreateUserDto) {
     const { name, email, password } = createUserDto;
 
-    const emailTaken = await this.usersRepo.findByEmail({
-      where: { email },
-      select: { id: true },
-    });
+    const emailTaken = await this.usersRepo.findByEmail(email);
 
     if (emailTaken) {
       throw new ConflictException('This email is already in use');
@@ -21,7 +18,7 @@ export class UsersService {
 
     const hashedPassword = await hash(password, 12);
 
-    const result = await this.usersRepo.create({
+    const result = await this.usersRepo.createUser({
       data: {
         name,
         email,
@@ -50,5 +47,13 @@ export class UsersService {
     });
 
     return result;
+  }
+
+  async deleteUser(userId: string) {
+    await this.usersRepo.deleteUser(userId);
+  }
+
+  async findUserById(userId: string) {
+    await this.usersRepo.findById(userId);
   }
 }
