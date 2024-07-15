@@ -18,6 +18,6 @@ export class UsersService {
   }
 
   deleteUser(userId: string) {
-    return this.usersRepo.deleteUser(userId);
+    return this.usersRepo.delete(userId);
   }
 }

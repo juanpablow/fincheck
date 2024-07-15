@@ -7,7 +7,7 @@ import { PrismaService } from '../prisma.service';
 export class UsersRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  createUser(createUserDto: Prisma.UserCreateArgs) {
+  create(createUserDto: Prisma.UserCreateArgs) {
     return this.prismaService.user.create(createUserDto);
   }
 
@@ -15,7 +15,7 @@ export class UsersRepository {
     return this.prismaService.user.findUnique(findUniqueDto);
   }
 
-  deleteUser(userId: string) {
+  delete(userId: string) {
     return this.prismaService.user.delete({ where: { id: userId } });
   }
 }
