@@ -8,7 +8,7 @@ import { UsersModule } from 'src/modules/users/users.module';
 describe('AuthService', () => {
   let authService: AuthService;
   let usersService: UsersService;
-  let createUserId: string;
+  let userCreated: any;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -22,11 +22,20 @@ describe('AuthService', () => {
 
   it('should signup a user', async () => {
     const user = await authService.signup(mockCreateUserDto);
-    createUserId = user.id;
+    expect(user).toHaveProperty('token');
+
+    userCreated = user;
+  });
+
+  it('should signin a user', async () => {
+    const user = await authService.signin({
+      email: userCreated.email,
+      password: mockCreateUserDto.password,
+    });
     expect(user).toHaveProperty('token');
   });
 
-  afterEach(async () => {
-    await usersService.deleteUser(createUserId);
+  afterAll(async () => {
+    await usersService.deleteUser(userCreated.id);
   });
 });
