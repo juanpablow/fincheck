@@ -30,7 +30,7 @@ export class AuthService {
 
     const hashedPassword = await hash(password, 12);
 
-    const user = await this.usersRepo.createUser({
+    const user = await this.usersRepo.create({
       data: {
         name,
         email,
