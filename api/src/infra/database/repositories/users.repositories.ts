@@ -11,22 +11,11 @@ export class UsersRepository {
     return this.prismaService.user.create(createUserDto);
   }
 
-  findByEmail(email: string) {
-    return this.prismaService.user.findUnique({
-      where: {
-        email,
-      },
-      select: {
-        id: true,
-      },
-    });
+  findUnique(findUniqueDto: Prisma.UserFindUniqueArgs) {
+    return this.prismaService.user.findUnique(findUniqueDto);
   }
 
   deleteUser(userId: string) {
     return this.prismaService.user.delete({ where: { id: userId } });
-  }
-
-  findById(userId: string) {
-    return this.prismaService.user.findUnique({ where: { id: userId } });
   }
 }
