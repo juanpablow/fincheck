@@ -8,6 +8,7 @@ import { UpdateTransactionDto } from '../dto/update-transaction.dto';
 import { ValidateBankAccountOwnershipService } from 'src/modules/bank-accounts/services/validate-bank-account-ownership.service';
 import { ValidateCategoryOwnershipService } from 'src/modules/categories/services/validate-category-ownership.service';
 import { ValidateTransactionOwnershipService } from './validate-transaction-ownership.service';
+import { TransactionType } from '../entities/transaction.enum';
 
 @Injectable()
 export class TransactionsService {
@@ -36,10 +37,25 @@ export class TransactionsService {
     });
   }
 
-  findAllByUserId(userId: string) {
+  findAllByUserId(
+    userId: string,
+    filters: {
+      month: number;
+      year: number;
+      bankAccountId?: string;
+      type?: TransactionType;
+    },
+  ) {
+    const { month, year, bankAccountId, type } = filters;
     return this.transactionsRepo.findMany({
       where: {
         userId,
+        bankAccountId,
+        type,
+        date: {
+          gte: new Date(Date.UTC(year, month)), // Greater than or equal. Get the first day of the month
+          lt: new Date(Date.UTC(year, month + 1)), // Less than
+        },
       },
     });
   }
