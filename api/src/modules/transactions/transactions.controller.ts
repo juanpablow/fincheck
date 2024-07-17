@@ -9,11 +9,15 @@ import {
   ParseUUIDPipe,
   HttpStatus,
   HttpCode,
+  Query,
+  ParseIntPipe,
+  ParseEnumPipe,
 } from '@nestjs/common';
 import { TransactionsService } from './services/transactions.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { ActiveUserId } from 'src/shared/decorators/ActiveUserId';
+import { TransactionType } from './entities/transaction.enum';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -28,8 +32,21 @@ export class TransactionsController {
   }
 
   @Get()
-  findAll(@ActiveUserId() userId: string) {
-    return this.transactionsService.findAllByUserId(userId);
+  findAll(
+    @ActiveUserId() userId: string,
+    @Query('month', ParseIntPipe) month: number,
+    @Query('year', ParseIntPipe) year: number,
+    @Query('bankAccountId', new ParseUUIDPipe({ optional: true }))
+    bankAccountId?: string,
+    @Query('type', new ParseEnumPipe(TransactionType, { optional: true }))
+    type?: TransactionType,
+  ) {
+    return this.transactionsService.findAllByUserId(userId, {
+      month,
+      year,
+      bankAccountId,
+      type,
+    });
   }
 
   @Put(':transactionId')
