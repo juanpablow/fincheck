@@ -41,7 +41,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <button
             type="button"
             onClick={togglePasswordVisibility}
-            className="absolute top-1 end-0 p-3.5 rounded-e-md"
+            className="absolute top-1 end-0 p-3.5 rounded-e-md border-none"
           >
             <svg
               className="flex-shrink-0 size-4 text-gray-400 dark:text-neutral-600"
