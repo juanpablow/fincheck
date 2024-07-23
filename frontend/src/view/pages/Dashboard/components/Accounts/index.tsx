@@ -1,6 +1,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
+import { Mousewheel, Pagination } from "swiper/modules";
+
 import { EyeIcon } from "../../../../components/icons/EyeIcon";
 import { AccountCard } from "../Accounts/AccountCard";
 import { SliderNavigation } from "./SliderNavigation";
@@ -28,6 +30,8 @@ export function Accounts() {
         <div>
           <Swiper
             spaceBetween={16}
+            mousewheel
+            modules={[Mousewheel, Pagination]}
             slidesPerView={windowWidth <= 500 ? 1.2 : 2.1}
             onSlideChange={(swiper) => {
               setSliderState({
