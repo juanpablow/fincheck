@@ -1,4 +1,4 @@
-import illustration from "../../assets/illustration.png";
+import illustration from "@assets/illustration.png";
 import { Logo } from "../components/Logo";
 
 import { Outlet } from "react-router-dom";

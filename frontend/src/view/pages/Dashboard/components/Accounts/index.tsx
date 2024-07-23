@@ -3,7 +3,7 @@ import "swiper/css";
 
 import { Mousewheel, Pagination } from "swiper/modules";
 
-import { EyeIcon } from "../../../../components/icons/EyeIcon";
+import { EyeIcon } from "@view/components/icons/EyeIcon";
 import { AccountCard } from "../Accounts/AccountCard";
 import { SliderNavigation } from "./SliderNavigation";
 import { useAccountsController } from "./useAccountsController";

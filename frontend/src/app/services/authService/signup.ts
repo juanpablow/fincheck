@@ -1,4 +1,4 @@
-import { sleep } from "../../utils/sleep";
+import { sleep } from "@app/utils/sleep";
 import { httpClient } from "../httpClient";
 
 export interface SignupParams {

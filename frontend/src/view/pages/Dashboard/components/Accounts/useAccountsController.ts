@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useWindowWidth } from "../../../../../app/hooks/useWindowWidth";
+import { useWindowWidth } from "@app/hooks/useWindowWidth";
 
 export function useAccountsController() {
   const windowWidth = useWindowWidth();
