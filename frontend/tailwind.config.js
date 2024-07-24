@@ -185,9 +185,9 @@ export default {
       },
       animation: {
         "slide-down-and-fade":
-          "slideDownAndFade 650ms cubic-bezier(0.16, 1, 0.3, 1)",
+          "slideDownAndFade 450ms cubic-bezier(0.16, 1, 0.3, 1)",
         "slide-up-and-fade":
-          "slideUpAndFade 650ms cubic-bezier(0.16, 1, 0.3, 1)",
+          "slideUpAndFade 450ms cubic-bezier(0.16, 1, 0.3, 1)",
       },
     },
   },
