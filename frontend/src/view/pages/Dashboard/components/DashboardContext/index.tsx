@@ -10,11 +10,20 @@ export const DashboardContext = createContext({} as DashboardContextValue);
 
 export function DashboardProvider({ children }: { children: React.ReactNode }) {
   const [areValuesVisible, setAreValuesVisible] = useState<boolean>(() => {
-    const storeAreValuesVisible: boolean = JSON.parse(
-      localStorage.getItem(localStorageKeys.ARE_VALUES_VISIBLE) as string
+    const storedAreValuesVisible = localStorage.getItem(
+      localStorageKeys.ARE_VALUES_VISIBLE
     );
 
-    return storeAreValuesVisible;
+    const parsedValue =
+      storedAreValuesVisible !== null
+        ? JSON.parse(storedAreValuesVisible)
+        : null;
+
+    const isValid = typeof parsedValue == "boolean";
+
+    console.log(storedAreValuesVisible);
+
+    return isValid ? parsedValue : true;
   });
 
   const toggleValueVisibility = useCallback(() => {
