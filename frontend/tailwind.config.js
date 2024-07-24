@@ -173,6 +173,22 @@ export default {
           900: "#D9480F",
         },
       },
+      keyframes: {
+        slideDownAndFade: {
+          from: { opacity: 0, transform: "translateY(-2px)" },
+          to: { opacity: 1, transform: "translateY(0)" },
+        },
+        slideUpAndFade: {
+          from: { opacity: 0, transform: "translateY(2px)" },
+          to: { opacity: 1, transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        "slide-down-and-fade":
+          "slideDownAndFade 650ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "slide-up-and-fade":
+          "slideUpAndFade 650ms cubic-bezier(0.16, 1, 0.3, 1)",
+      },
     },
   },
   plugins: [],
