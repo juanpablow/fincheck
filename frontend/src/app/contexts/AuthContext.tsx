@@ -31,6 +31,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signout = useCallback(() => {
     localStorage.removeItem(localStorageKeys.ACCESS_TOKEN);
+    localStorage.removeItem(localStorageKeys.ARE_VALUES_VISIBLE);
 
     setSignedIn(false);
   }, []);
