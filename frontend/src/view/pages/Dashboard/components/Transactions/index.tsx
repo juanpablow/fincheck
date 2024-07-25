@@ -1,5 +1,3 @@
-import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { TransactionsIcon } from "@view/components/icons/TransactionsIcon";
 import { FilterIcon } from "@view/components/icons/FilterIcon";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Pagination } from "swiper/modules";
@@ -12,10 +10,19 @@ import { useTransactionsController } from "./useTransactionsController";
 import { cn } from "@app/utils/cn";
 import { Spinner } from "@view/components/Spinner";
 import emptyStateImage from "@assets/empty-state.svg";
+import { TransactionTypeDropdown } from "./TransactionTypeDropdown";
+import { FiltersModal } from "./FiltersModal";
 
 export function Transactions() {
-  const { areValuesVisible, transactions, isInitialLoading, isLoading } =
-    useTransactionsController();
+  const {
+    areValuesVisible,
+    transactions,
+    isInitialLoading,
+    isLoading,
+    isFiltersModalOpen,
+    handleOpenFiltersModal,
+    handleCloseFiltersModal,
+  } = useTransactionsController();
 
   const hasTransactions = transactions.length > 0;
 
@@ -29,17 +36,14 @@ export function Transactions() {
 
       {!isInitialLoading && (
         <>
+          <FiltersModal
+            open={isFiltersModalOpen}
+            onClose={handleCloseFiltersModal}
+          />
           <header>
             <div className="flex items-center justify-between">
-              <button className="flex items-center gap-2">
-                <TransactionsIcon />
-                <span className="text-sm text-gray-800 tracking-[-0.5px] font-medium">
-                  Transações
-                </span>
-                <ChevronDownIcon className="text-gray-900" />
-              </button>
-
-              <button>
+              <TransactionTypeDropdown />
+              <button onClick={handleOpenFiltersModal}>
                 <FilterIcon />
               </button>
             </div>
