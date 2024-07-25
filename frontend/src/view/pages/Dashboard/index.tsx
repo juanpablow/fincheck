@@ -3,6 +3,7 @@ import { UserMenu } from "@view/components/UserMenu";
 import { Accounts } from "./components/Accounts";
 import { Transactions } from "./components/Transactions";
 import { DashboardProvider } from "./components/DashboardContext";
+import { Fab } from "./components/Fab";
 
 export function Dashboard() {
   return (
@@ -22,6 +23,7 @@ export function Dashboard() {
             <Transactions />
           </div>
         </main>
+        <Fab />
       </div>
     </DashboardProvider>
   );
