@@ -4,9 +4,13 @@ import { createContext, useCallback, useState } from "react";
 interface DashboardContextValue {
   areValuesVisible: boolean;
   isNewAccountModalOpen: boolean;
+  isNewTransactionModalOpen: boolean;
+  newTransactionType: "income" | "expense" | null;
   toggleValueVisibility(): void;
   openNewAccountModal(): void;
   closeNewAccountModal(): void;
+  openNewTransactionModal(type: "income" | "expense"): void;
+  closeNewTransactionModal(): void;
 }
 
 export const DashboardContext = createContext({} as DashboardContextValue);
@@ -29,6 +33,11 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
     return isValid ? parsedValue : true;
   });
   const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
+  const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] =
+    useState(false);
+  const [newTransactionType, setNewTransactionType] = useState<
+    "income" | "expense" | null
+  >(null);
 
   const toggleValueVisibility = useCallback(() => {
     setAreValuesVisible((prevState) => {
@@ -40,6 +49,7 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
       return newState;
     });
   }, []);
+
   const openNewAccountModal = useCallback(() => {
     setIsNewAccountModalOpen(true);
   }, []);
@@ -48,13 +58,28 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
     setIsNewAccountModalOpen(false);
   }, []);
 
+  const openNewTransactionModal = useCallback((type: "income" | "expense") => {
+    setNewTransactionType(type);
+    setIsNewTransactionModalOpen(true);
+  }, []);
+
+  const closeNewTransactionModal = useCallback(() => {
+    setNewTransactionType(null);
+    setIsNewTransactionModalOpen(false);
+  }, []);
+
   return (
     <DashboardContext.Provider
       value={{
         areValuesVisible,
+        isNewTransactionModalOpen,
         isNewAccountModalOpen,
+        newTransactionType,
+        toggleValueVisibility,
         openNewAccountModal,
         closeNewAccountModal,
+        openNewTransactionModal,
+        closeNewTransactionModal,
       }}
     >
       {children}
