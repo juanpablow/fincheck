@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as RdxSelect from "@radix-ui/react-select";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { cn } from "@app/utils/cn";
-import { ErrorMessage } from "./ErrorMessage";
+import { ErrorMessage } from "./FieldError";
 
 interface SelectProps {
   className?: string;
