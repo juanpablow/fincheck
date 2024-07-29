@@ -28,8 +28,6 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
 
     const isValid = typeof parsedValue == "boolean";
 
-    console.log(storedAreValuesVisible);
-
     return isValid ? parsedValue : true;
   });
   const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
