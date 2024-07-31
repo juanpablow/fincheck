@@ -42,8 +42,14 @@ export function useRegisterController() {
 
       toast.success("Conta criada com sucesso!");
       signin(accessToken);
-    } catch {
-      toast.error("Ocorreu um erro ao criar sua conta!");
+    } catch (error) {
+      if (error instanceof Error && error.message.includes("timeout")) {
+        toast.error(
+          "A solicitação demorou muito tempo para responder. Tente novamente"
+        );
+      } else {
+        toast.error("Ocorreu um erro ao criar sua conta!");
+      }
     }
   });
 

@@ -39,8 +39,14 @@ export function useLoginController() {
       const { accessToken } = await mutateAsync(body);
 
       signin(accessToken);
-    } catch {
-      toast.error("E-mail ou senha inválidos");
+    } catch (error) {
+      if (error instanceof Error && error.message.includes("timeout")) {
+        toast.error(
+          "A solicitação demorou muito tempo para responder. Tente novamente"
+        );
+      } else {
+        toast.error("E-mail ou senha inválidos");
+      }
     }
   });
   return { handleSubmit, register, errors, isLoading };
