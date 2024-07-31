@@ -22,6 +22,7 @@ export function Accounts() {
     isLoading,
     accounts,
     openNewAccountModal,
+    currentBalance,
   } = useAccountsController();
 
   return (
@@ -44,7 +45,7 @@ export function Accounts() {
                   !areValuesVisible && "blur-[10px]"
                 )}
               >
-                {formatCurrency(6420.4)}
+                {formatCurrency(currentBalance)}
               </strong>
               <button
                 onClick={toggleValueVisibility}
@@ -105,30 +106,11 @@ export function Accounts() {
                       isEnd={sliderState.isEnd}
                     />
                   </div>
-                  <SwiperSlide>
-                    <AccountCard
-                      color="#7950F2"
-                      name="Nubank"
-                      balance={3450}
-                      type="checking"
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <AccountCard
-                      color="#333"
-                      name="XP Investimentos"
-                      balance={3000}
-                      type="investment"
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <AccountCard
-                      color="#3e9c35"
-                      name="Carteira"
-                      balance={100}
-                      type="cash"
-                    />
-                  </SwiperSlide>
+                  {accounts.map((account) => (
+                    <SwiperSlide key={account.id}>
+                      <AccountCard data={account} />
+                    </SwiperSlide>
+                  ))}
                 </Swiper>
               </div>
             )}
