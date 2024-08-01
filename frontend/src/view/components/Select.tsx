@@ -21,8 +21,8 @@ export function Select({
   placeholder,
   options,
   error,
-  onChange,
   value,
+  onChange,
 }: SelectProps) {
   const [selectedValue, setSelectedValue] = useState(value);
 
