@@ -1,0 +1,8 @@
+{
+  "name": "fincheck",
+  "scripts": {
+    "build": "pnpm run build:api && pnpm run build:frontend",
+    "build:api": "pnpm --filter api install && pnpm --filter api run build",
+    "build:frontend": "pnpm --filter frontend install && pnpm --filter frontend run build"
+  }
+}
