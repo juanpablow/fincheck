@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useDashboard } from "../DashboardContext/useDashboard";
+import { useTransactions } from "@app/hooks/useTransactions";
 
 export function useTransactionsController() {
   const { areValuesVisible } = useDashboard();
 
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
+
+  const { transactions } = useTransactions();
 
   function handleOpenFiltersModal() {
     setIsFiltersModalOpen(true);
@@ -16,7 +19,7 @@ export function useTransactionsController() {
 
   return {
     areValuesVisible,
-    transactions: [1],
+    transactions,
     isInitialLoading: false,
     isLoading: false,
     isFiltersModalOpen,
