@@ -11,11 +11,12 @@
     "outDir": "./dist",
     "baseUrl": ".",
     "paths": {
-      "src/*": ["src/*"],
+      "src/*": ["./src/*"],
+      "@module/*": ["src/modules/*"],
+      "@infra/*": ["src/infra/*"],
+      "@shared/*": ["src/shared/*"],
       "test/*": ["test/*"]
     },
-    "typeRoots": ["./node_modules/@types"],
-    "types": ["node", "express"],
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
