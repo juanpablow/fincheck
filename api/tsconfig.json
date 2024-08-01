@@ -14,6 +14,8 @@
       "src/*": ["src/*"],
       "test/*": ["test/*"]
     },
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["node", "express"],
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,

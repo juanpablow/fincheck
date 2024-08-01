@@ -12,6 +12,10 @@ async function bootstrap() {
     origin: '*',
   });
 
-  await app.listen(3000, '0.0.0.0');
+  console.log(`DATABASE_URL: ${process.env.DATABASE_URL}`);
+  console.log(`FRONTEND_URL: ${process.env.FRONTEND_URL}`);
+
+  await app.listen(3000);
+  console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
