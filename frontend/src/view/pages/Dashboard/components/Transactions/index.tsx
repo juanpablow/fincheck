@@ -21,8 +21,11 @@ export function Transactions() {
     isInitialLoading,
     isLoading,
     isFiltersModalOpen,
+    filters,
     handleOpenFiltersModal,
     handleCloseFiltersModal,
+    handleChangeFilters,
+    handleApplyFilters,
   } = useTransactionsController();
 
   const hasTransactions = transactions.length > 0;
@@ -40,6 +43,7 @@ export function Transactions() {
           <FiltersModal
             open={isFiltersModalOpen}
             onClose={handleCloseFiltersModal}
+            onApplyFilters={handleApplyFilters}
           />
           <header>
             <div className="flex items-center justify-between">
@@ -55,10 +59,14 @@ export function Transactions() {
 
             <div className="mt-6 relative">
               <Swiper
+                initialSlide={filters.month}
                 slidesPerView={3}
                 centeredSlides
                 mousewheel
                 modules={[Mousewheel, Pagination]}
+                onSlideChange={(swiper) => {
+                  handleChangeFilters("month")(swiper.realIndex);
+                }}
               >
                 <SliderNavigation />
                 {MONTHS.map((month, index) => (
@@ -120,7 +128,7 @@ export function Transactions() {
                       transaction.type === "expense"
                         ? "text-red-800"
                         : "text-green-900",
-                      !areValuesVisible && "blur-[6px]"
+                      !areValuesVisible && "blur-[6px]",
                     )}
                   >
                     {transaction.type === "expense" ? "-" : "+"}

@@ -1,34 +1,28 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { Button } from "@view/components/Button";
 import { Modal } from "@view/components/Modal";
-import { useFiltersModal } from "./useFiltersModal";
+import { useFiltersModal } from "./useFiltersModalController";
 import { cn } from "@app/utils/cn";
 
 interface FiltersModalProps {
   open: boolean;
   onClose(): void;
+  onApplyFilters(filters: {
+    bankAccountId: string | undefined;
+    year: number;
+  }): void;
 }
 
-const mockedAccounts = [
-  {
-    id: "123",
-    name: "Nubank",
-  },
-  {
-    id: "456",
-    name: "XP Investimentos",
-  },
-  {
-    id: "789",
-    name: "Carteira",
-  },
-];
-
-export function FiltersModal({ open, onClose }: FiltersModalProps) {
+export function FiltersModal({
+  open,
+  onClose,
+  onApplyFilters,
+}: FiltersModalProps) {
   const {
-    handleSelectBankAccount,
     selectedBankAccountId,
     selectedYear,
+    accounts,
+    handleSelectBankAccount,
     handleChangeYear,
   } = useFiltersModal();
   return (
@@ -38,13 +32,13 @@ export function FiltersModal({ open, onClose }: FiltersModalProps) {
           Conta
         </span>
         <div className="space-y-2 mt-2">
-          {mockedAccounts.map((account) => (
+          {accounts.map((account) => (
             <button
               onClick={() => handleSelectBankAccount(account.id)}
               key={account.id}
               className={cn(
                 "p-2 rounded-2xl w-full text-left hover:bg-gray-50 transition-colors text-gray-800",
-                account.id === selectedBankAccountId && "!bg-gray-200"
+                account.id === selectedBankAccountId && "!bg-gray-200",
               )}
             >
               {account.name}
@@ -76,7 +70,17 @@ export function FiltersModal({ open, onClose }: FiltersModalProps) {
           </button>
         </div>
       </div>
-      <Button className="w-full mt-10">Aplicar filtros</Button>
+      <Button
+        className="w-full mt-10"
+        onClick={() =>
+          onApplyFilters({
+            bankAccountId: selectedBankAccountId,
+            year: selectedYear,
+          })
+        }
+      >
+        Aplicar filtros
+      </Button>
     </Modal>
   );
 }
