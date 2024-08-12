@@ -43,7 +43,11 @@ export function Transactions() {
           />
           <header>
             <div className="flex items-center justify-between">
-              <TransactionTypeDropdown />
+              <TransactionTypeDropdown
+                onSelect={handleChangeFilters("type")}
+                selectedType={filters.type}
+              />
+
               <button onClick={handleOpenFiltersModal}>
                 <FilterIcon />
               </button>
