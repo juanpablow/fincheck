@@ -43,10 +43,13 @@ export function useRegisterController() {
       toast.success("Conta criada com sucesso!");
       signin(accessToken);
     } catch (error) {
-      if (error instanceof Error && error.message.includes("timeout")) {
+      const error_msg = String(error instanceof Error && error.message);
+      if (error_msg.includes("Server unreachable")) {
         toast.error(
-          "A solicitação demorou muito tempo para responder. Tente novamente"
+          "O servidor não está respondendo. Tente novamente mais tarde.",
         );
+      } else if (error_msg.includes("This email is already in use")) {
+        toast.error("Este e-mail já existe");
       } else {
         toast.error("Ocorreu um erro ao criar sua conta!");
       }
