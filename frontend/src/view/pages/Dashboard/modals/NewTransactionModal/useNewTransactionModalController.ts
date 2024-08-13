@@ -52,23 +52,24 @@ export function useNewTransactionModalController() {
         date: body.date.toISOString(),
       });
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      queryClient.invalidateQueries({ queryKey: ["bankAccounts"] });
       toast.success(
         newTransactionType === "expense"
           ? "Despesa cadastrada com sucesso!"
-          : "Receita cadastrada com sucesso!"
+          : "Receita cadastrada com sucesso!",
       );
       closeNewTransactionModal();
       reset();
     } catch (error) {
       if (error instanceof Error && error.message.includes("timeout")) {
         toast.error(
-          "A solicitação demorou muito tempo para responder. Tente novamente"
+          "A solicitação demorou muito tempo para responder. Tente novamente",
         );
       } else {
         toast.error(
           newTransactionType === "expense"
             ? "Erro ao cadastrar a despesa!"
-            : "Erro ao cadastrar a Receita!"
+            : "Erro ao cadastrar a Receita!",
         );
       }
     }
@@ -76,7 +77,7 @@ export function useNewTransactionModalController() {
 
   const categories = useMemo(() => {
     return categoriesList.filter(
-      (category) => category.type === newTransactionType
+      (category) => category.type === newTransactionType,
     );
   }, [categoriesList, newTransactionType]);
 
