@@ -85,7 +85,7 @@ export class TransactionsService {
     });
 
     return this.transactionsRepo.update({
-      where: { id: transactionId, userId, bankAccountId, categoryId },
+      where: { id: transactionId },
       data: {
         bankAccountId,
         categoryId,
