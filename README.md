@@ -1,5 +1,7 @@
 # Fincheck - Personal Finance Management System
 
+![Initial Screen](https://github.com/juanpablow/fincheck/blob/main/docs/images/dashboard-screen.png)
+
 **Fincheck** is a personal finance management system developed during the **JStack** course. The project follows best practices in software development, such as **Clean Architecture**, **SOLID principles**, and a modular design, allowing users to manage their finances efficiently.
 
 ## Features
